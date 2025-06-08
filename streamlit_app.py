@@ -144,7 +144,7 @@ if not st.session_state.started:
     """, unsafe_allow_html=True)
     cols = st.columns(7)
     with cols[3]:
-        st.button("Apply for a Job ", on_click=start_app)
+        st.button("Apply for a Job", on_click=start_app, use_container_width=True)
     st.stop()
 
 # --- Collect user info ---
