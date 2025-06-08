@@ -18,16 +18,17 @@ st.markdown(
         bottom: 0;
         left:0;
         width: 100%;
-        background-color: #f9f9f9;
+        # background-color: #f9f9f9;
         text-align: center;
         padding: 10px;
         font-size: 0.9em;
+        
         color: #666;
         border-top: 1px solid #e6e6e6;
     }
     </style>
     <div class="footer">
-        © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.
+        © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.|Sai Kowsik Tukuntla
     </div>
     """,
     unsafe_allow_html=True
