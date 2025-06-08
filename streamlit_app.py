@@ -64,9 +64,9 @@ st.markdown("""
         </form>
     </div>
 """, unsafe_allow_html=True)
-if "help_button" in st.experimental_get_query_params():
+if "help_button" in st.query_params():
     toggle_help()
-    st.experimental_set_query_params()  
+    st.query_params()  
     
 if st.session_state.show_help:
     st.info("""
