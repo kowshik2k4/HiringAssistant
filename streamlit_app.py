@@ -33,51 +33,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-if "show_help" not in st.session_state:
-    st.session_state.show_help = False
-
-def toggle_help():
-    st.session_state.show_help = not st.session_state.show_help
-st.markdown("""
-    <style>
-    .circular-help-btn {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background-color: #2196F3;
-        color: white;
-        font-size: 24px;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-        text-align: center;
-        line-height: 60px;
-        transition: background-color 0.3s ease;
-    }
-    .circular-help-btn:hover {
-        background-color: #1976D2;
-    }
-    </style>
-    <div style="text-align: center; margin-top: 1em;">
-        <form action="" method="post">
-            <input type="submit" name="help_button" value="?" class="circular-help-btn" title="Need Help?" />
-        </form>
-    </div>
-""", unsafe_allow_html=True)
-if "help_button" in st.query_params():
-    toggle_help()
-    st.query_params()  
-    
-if st.session_state.show_help:
-    st.info("""
-    ### 🆘 General Assistance
-
-    - 💡 *What is a tech stack?* List your known tools: `Python, React, MySQL`, etc.
-    - ⏭️ *Can I skip a question?* Yes — just leave it blank or type `skip`.
-    - 🤷 *Not sure what to answer?* Give your best — we’re looking for effort too.
-    - 💬 *Need to restart?* Refresh the page anytime.
-    """)
-
 
 fields = ["name", "email", "phone", "experience", "position", "location", "tech_stack"]
 questions_text = {
