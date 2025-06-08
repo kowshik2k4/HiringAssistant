@@ -9,6 +9,17 @@ st.title("🤖 TalentScout - Hiring Assistant")
 
 # --- Footer Spacer ---
 st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+# --- Spaced Regular Footer ---
+st.markdown(
+    """
+    <div style='margin-top: 5em;'></div>
+    <hr>
+    <div style='text-align: center; font-size: 0.9em; color: #999; padding-top: 1em;'>
+        © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 fields = ["name", "email", "phone", "experience", "position", "location", "tech_stack"]
 questions_text = {
