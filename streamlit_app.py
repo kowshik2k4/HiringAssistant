@@ -7,16 +7,9 @@ st.set_page_config(page_title="TalentScout Hiring Assistant")
 st.title("🤖 TalentScout - Hiring Assistant")
 # --- Footer ---
 
-st.markdown(
-    """
-    <div style='margin-top: 5em;'></div>
-    <hr>
-    <div style='text-align: center;bottom:0;left:0; font-size: 0.9em; color: #999; padding-top: 1em;'>
-        © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# --- Footer Spacer ---
+st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+
 fields = ["name", "email", "phone", "experience", "position", "location", "tech_stack"]
 questions_text = {
     "name": "What is your full name?",
