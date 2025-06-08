@@ -28,7 +28,7 @@ st.markdown(
     }
     </style>
     <div class="footer">
-        © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.|Sai Kowsik Tukuntla
+        © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.|Sai Kowsik Tukuntla|st.button("🆘 Need Help?", on_click=toggle_help)
     </div>
     """,
     unsafe_allow_html=True
@@ -42,7 +42,7 @@ def toggle_help():
 
 # --- Help button ---
 
-st.button("🆘 Need Help?", on_click=toggle_help)
+
 
 # --- Display Help if toggled ---
 if st.session_state.show_help:
