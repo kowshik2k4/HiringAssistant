@@ -142,8 +142,8 @@ if not st.session_state.started:
             <p style='font-size: 18px;'>I'm your AI Hiring Assistant. Click below to begin.</p>
         </div>
     """, unsafe_allow_html=True)
-    cols = st.columns(7)
-    with cols[3]:
+    cols = st.columns(5)
+    with cols[2]:
         st.button("Apply for a Job", on_click=start_app, use_container_width=True)
     st.stop()
 
