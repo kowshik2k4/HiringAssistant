@@ -8,39 +8,41 @@ st.title("🤖 TalentScout - Hiring Assistant")
 # --- Footer ---
 
 # --- Footer Spacer ---
-# --- Regular Footer ---
+# --- Regular Footer --
 # --- Sticky Footer ---
+# Initialize state
+if "hide_footer" not in st.session_state:
+    st.session_state.hide_footer = False
 
-st.markdown(
-    """
-    <style>
-    /* Add bottom padding to prevent overlap with footer */
-    .block-container {
-        padding-bottom: 100px !important;
-    }
+# Conditionally render footer
+if not st.session_state.hide_footer:
+    st.markdown(
+        """
+        <style>
+        .block-container {
+            padding-bottom: 100px !important;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0e1117;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            color: #f9f9f9;
+            border-top: 1px solid #e6e6e6;
+            z-index: 100;
+        }
+        </style>
 
-    .footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #0e1117;
-        text-align: center;
-        padding: 10px;
-        font-size: 0.9em;
-        color: #f9f9f9;
-        border-top: 1px solid #e6e6e6;
-        z-index: 100;
-    }
-    </style>
-
-    <div class="footer">
-        © 2025 TalentScout AI. All rights reserved | Built with ❤️ using Streamlit and Gemini AI | Sai Kowsik Tukuntla |
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
+        <div class="footer">
+            © 2025 TalentScout AI. All rights reserved | Built with ❤️ using Streamlit and Gemini AI | Sai Kowsik Tukuntla |
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 fields = ["name", "email", "phone", "experience", "position", "location", "tech_stack"]
@@ -78,6 +80,8 @@ if "q_correct" not in st.session_state:
 
 def start_app():
     st.session_state.started = True
+    st.session_state.hide_footer = True
+    
 
 def is_valid(field, value):
     if field == "name":
