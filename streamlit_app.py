@@ -144,7 +144,7 @@ if not st.session_state.started:
     """, unsafe_allow_html=True)
     cols = st.columns(7)
     with cols[3]:
-        st.button("Start", on_click=start_app)
+        st.button("Apply for a Job ", on_click=start_app)
     st.stop()
 
 # --- Collect user info ---
@@ -263,5 +263,29 @@ else:
 #         st.success("✅ Thank you! Our recruting team will follow up with you shortly.")
 #     else:
 #         st.info("We appreciate your effort! Follow our carrers website for any upcoming jobs.")
+# --- Help toggle state ---
+if "show_help" not in st.session_state:
+    st.session_state.show_help = False
+
+# --- Toggle function ---
+def toggle_help():
+    st.session_state.show_help = not st.session_state.show_help
+
+# --- Help button ---
+st.button("🆘 Need Help?", on_click=toggle_help)
+
+# --- Display Help if toggled ---
+if st.session_state.show_help:
+    st.info("""
+    ### 💬 General Assistance
+
+    Here’s how I can help:
+
+    - 💡 **Tech Stack?** Just list your known tools — e.g., `Python, Django, MySQL`.
+    - ⏭️ **Skip a question?** Just type `skip`.
+    - 🔁 **Restart?** Refresh the page.
+    - 🤷 **Not sure what to answer?** Give your best try — honesty is appreciated!
+    - 🆘 **Still stuck?** Contact support or check our Careers page.
+    """)
 
     
