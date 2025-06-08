@@ -214,6 +214,7 @@ else:
         st.info("👍 Good effort! Keep growing — we'll keep your profile in view.")
     else:
         st.warning("Thanks for trying! Stay updated on our careers page for future roles.")
+st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
 # # --- Start Screen ---
 # if not st.session_state.started:
 #     st.markdown("<h3 style='text-align: center;'>👋 Welcome to TalentScout!</h3>", unsafe_allow_html=True)
