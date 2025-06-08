@@ -23,7 +23,7 @@ st.markdown(
         padding: 10px;
         font-size: 0.9em;
         
-        color: #666;
+        color:#f9f9f9;
         border-top: 1px solid #e6e6e6;
     }
     </style>
