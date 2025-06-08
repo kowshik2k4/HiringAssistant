@@ -28,7 +28,7 @@ st.markdown(
     }
     </style>
     <div class="footer">
-        © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.|Sai Kowsik Tukuntla|st.button("🆘 Need Help?", on_click=toggle_help)
+        © 2025 TalentScout AI. All rights reserved | Built with ❤️ using Streamlit and Gemini AI |Sai Kowsik Tukuntla|
     </div>
     """,
     unsafe_allow_html=True
@@ -36,26 +36,46 @@ st.markdown(
 if "show_help" not in st.session_state:
     st.session_state.show_help = False
 
-# --- Toggle function ---
 def toggle_help():
     st.session_state.show_help = not st.session_state.show_help
-
-# --- Help button ---
-
-
-
-# --- Display Help if toggled ---
+st.markdown("""
+    <style>
+    .circular-help-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #2196F3;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        line-height: 60px;
+        transition: background-color 0.3s ease;
+    }
+    .circular-help-btn:hover {
+        background-color: #1976D2;
+    }
+    </style>
+    <div style="text-align: center; margin-top: 1em;">
+        <form action="" method="post">
+            <input type="submit" name="help_button" value="?" class="circular-help-btn" title="Need Help?" />
+        </form>
+    </div>
+""", unsafe_allow_html=True)
+if "help_button" in st.experimental_get_query_params():
+    toggle_help()
+    st.experimental_set_query_params()  
+    
 if st.session_state.show_help:
     st.info("""
-    ### 💬 General Assistance
+    ### 🆘 General Assistance
 
-    Here’s how I can help:
-
-    - 💡 **Tech Stack?** Just list your known tools — e.g., `Python, Django, MySQL`.
-    - ⏭️ **Skip a question?** Just type `skip`.
-    - 🔁 **Restart?** Refresh the page.
-    - 🤷 **Not sure what to answer?** Give your best try — honesty is appreciated!
-    - 🆘 **Still stuck?** Contact support or check our Careers page.
+    - 💡 *What is a tech stack?* List your known tools: `Python, React, MySQL`, etc.
+    - ⏭️ *Can I skip a question?* Yes — just leave it blank or type `skip`.
+    - 🤷 *Not sure what to answer?* Give your best — we’re looking for effort too.
+    - 💬 *Need to restart?* Refresh the page anytime.
     """)
 
 
