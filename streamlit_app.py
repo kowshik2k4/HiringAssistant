@@ -13,26 +13,30 @@ st.title("🤖 TalentScout - Hiring Assistant")
 st.markdown(
     """
     <style>
+    .main {
+        padding-bottom: 70px; /* Adjust depending on footer height */
+    }
     .footer {
         position: fixed;
         bottom: 0;
-        left:0;
+        left: 0;
         width: 100%;
-        # background-color: #f9f9f9;
+        background-color: #0e1117;
         text-align: center;
         padding: 10px;
         font-size: 0.9em;
-        
-        color:#f9f9f9;
+        color: #f9f9f9;
         border-top: 1px solid #e6e6e6;
+        z-index: 100;
     }
     </style>
     <div class="footer">
-        © 2025 TalentScout AI. All rights reserved | Built with ❤️ using Streamlit and Gemini AI |Sai Kowsik Tukuntla|
+        © 2025 TalentScout AI. All rights reserved | Built with ❤️ using Streamlit and Gemini AI | Sai Kowsik Tukuntla |
     </div>
     """,
     unsafe_allow_html=True
 )
+
 
 fields = ["name", "email", "phone", "experience", "position", "location", "tech_stack"]
 questions_text = {
