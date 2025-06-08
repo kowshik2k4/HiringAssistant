@@ -10,7 +10,7 @@ st.markdown(
     """
     <hr style="margin-top: 3em;">
     <div style='text-align: center; font-size: 0.9em; color: #999;'>
-        © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.|Sai Kowsik Tukuntla
+        © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.
     </div>
     """,
     unsafe_allow_html=True
