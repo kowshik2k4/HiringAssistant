@@ -11,7 +11,7 @@ st.markdown(
     """
     <div style='margin-top: 5em;'></div>
     <hr>
-    <div style='text-align: center; font-size: 0.9em; color: #999; padding-top: 1em;'>
+    <div style='text-align: center;bottom:0;left:0; font-size: 0.9em; color: #999; padding-top: 1em;'>
         © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.
     </div>
     """,
