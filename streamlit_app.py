@@ -5,11 +5,13 @@ from chatbot import generate_mcq_questions, evaluate_mcq_answer
 
 st.set_page_config(page_title="TalentScout Hiring Assistant")
 st.title("🤖 TalentScout - Hiring Assistant")
-# --- Sticky Footer ---
+# --- Footer ---
+
 st.markdown(
     """
-    <hr style="margin-top: 3em;">
-    <div style='text-align: center; font-size: 0.9em; color: #999;'>
+    <div style='margin-top: 5em;'></div>
+    <hr>
+    <div style='text-align: center; font-size: 0.9em; color: #999; padding-top: 1em;'>
         © 2025 TalentScout AI. All rights reserved. | Built with ❤️ using Streamlit and Gemini AI.
     </div>
     """,
