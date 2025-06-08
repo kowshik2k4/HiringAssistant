@@ -10,10 +10,31 @@ st.title("🤖 TalentScout - Hiring Assistant")
 # --- Footer Spacer ---
 # --- Regular Footer ---
 # --- Sticky Footer ---
-st.markdown("---")
+
 st.markdown(
     """
-    <div style='text-align: center; font-size: 0.9em; color:#666;'>
+    <style>
+    /* Add bottom padding to prevent overlap with footer */
+    .block-container {
+        padding-bottom: 100px !important;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #0e1117;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9em;
+        color: #f9f9f9;
+        border-top: 1px solid #e6e6e6;
+        z-index: 100;
+    }
+    </style>
+
+    <div class="footer">
         © 2025 TalentScout AI. All rights reserved | Built with ❤️ using Streamlit and Gemini AI | Sai Kowsik Tukuntla |
     </div>
     """,
