@@ -33,7 +33,30 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+if "show_help" not in st.session_state:
+    st.session_state.show_help = False
 
+# --- Toggle function ---
+def toggle_help():
+    st.session_state.show_help = not st.session_state.show_help
+
+# --- Help button ---
+
+st.button("🆘 Need Help?", on_click=toggle_help)
+
+# --- Display Help if toggled ---
+if st.session_state.show_help:
+    st.info("""
+    ### 💬 General Assistance
+
+    Here’s how I can help:
+
+    - 💡 **Tech Stack?** Just list your known tools — e.g., `Python, Django, MySQL`.
+    - ⏭️ **Skip a question?** Just type `skip`.
+    - 🔁 **Restart?** Refresh the page.
+    - 🤷 **Not sure what to answer?** Give your best try — honesty is appreciated!
+    - 🆘 **Still stuck?** Contact support or check our Careers page.
+    """)
 
 
 fields = ["name", "email", "phone", "experience", "position", "location", "tech_stack"]
@@ -264,28 +287,5 @@ else:
 #     else:
 #         st.info("We appreciate your effort! Follow our carrers website for any upcoming jobs.")
 # --- Help toggle state ---
-if "show_help" not in st.session_state:
-    st.session_state.show_help = False
-
-# --- Toggle function ---
-def toggle_help():
-    st.session_state.show_help = not st.session_state.show_help
-
-# --- Help button ---
-st.button("🆘 Need Help?", on_click=toggle_help)
-
-# --- Display Help if toggled ---
-if st.session_state.show_help:
-    st.info("""
-    ### 💬 General Assistance
-
-    Here’s how I can help:
-
-    - 💡 **Tech Stack?** Just list your known tools — e.g., `Python, Django, MySQL`.
-    - ⏭️ **Skip a question?** Just type `skip`.
-    - 🔁 **Restart?** Refresh the page.
-    - 🤷 **Not sure what to answer?** Give your best try — honesty is appreciated!
-    - 🆘 **Still stuck?** Contact support or check our Careers page.
-    """)
 
     
