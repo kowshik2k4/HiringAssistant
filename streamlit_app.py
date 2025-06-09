@@ -84,18 +84,10 @@ def handle_answer_submission():
     question = st.session_state.tech_questions[q_index]
     is_correct, feedback = evaluate_mcq_answer(question, selected_option)
 
-    if is_correct:
-        st.success("✅ Correct!")
-    else:
-        st.error("❌ Incorrect.")
-    st.info(f"💡 {feedback}")
-
     st.session_state.q_answers.append(selected_option)
     st.session_state.q_correct.append(is_correct)
     st.session_state.q_feedback.append(feedback)
     st.session_state.q_index += 1
-    st.toast("Moving to the next question...")
-    st.rerun()
 
 # --- Footer (to be shown only if not hidden) ---
 def show_footer():
