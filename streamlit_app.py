@@ -81,7 +81,7 @@ if "q_correct" not in st.session_state:
 def start_app():
     st.session_state.started = True
     st.session_state.hide_footer = True
-    st.rerun()
+    
     
 
 def is_valid(field, value):
@@ -157,6 +157,8 @@ if not st.session_state.started:
     cols = st.columns(5)
     with cols[2]:
         st.button("Apply for a Job", on_click=start_app, use_container_width=True)
+        if st.session_state.started and st.session_state.hide_footer:
+            st.rerun()
     st.stop()
 
 # --- Collect user info ---
