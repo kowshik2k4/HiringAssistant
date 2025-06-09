@@ -95,7 +95,7 @@ def handle_answer_submission():
     st.session_state.q_feedback.append(feedback)
     st.session_state.q_index += 1
     st.toast("Moving to the next question...")
-    st.experimental_rerun()
+    st.rerun()
 
 # --- Footer (to be shown only if not hidden) ---
 def show_footer():
@@ -151,7 +151,7 @@ if not st.session_state.started:
 
     # Manual rerun after state change
     if st.session_state.started and st.session_state.hide_footer:
-        st.experimental_rerun()
+        st.rerun()
 
     if not st.session_state.hide_footer:
         show_footer()
@@ -160,7 +160,9 @@ if not st.session_state.started:
 # --- UI: Form Collection ---
 idx = st.session_state.current_field_index
 st.markdown("<h3 style='text-align: center; margin-top: 2em;'>📝 Tell us about yourself</h3>", unsafe_allow_html=True)
-st.progress((idx+1)/len(fields), text=f"Step {idx+1} of {len(fields)}")
+progress_ratio = min((idx + 1) / len(fields), 1.0)
+st.progress(progress_ratio, text=f"Step {min(idx+1, len(fields))} of {len(fields)}")
+
 
 for i in range(idx):
     field = fields[i]
@@ -185,7 +187,7 @@ if not st.session_state.questions_ready:
         st.stop()
 
     st.session_state.questions_ready = True
-    st.experimental_rerun()
+    st.rerun()
 
 # --- Quiz Phase ---
 q_index = st.session_state.q_index
