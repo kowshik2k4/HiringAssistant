@@ -81,6 +81,7 @@ if "q_correct" not in st.session_state:
 def start_app():
     st.session_state.started = True
     st.session_state.hide_footer = True
+    st.rerun()
     
 
 def is_valid(field, value):
