@@ -18,17 +18,20 @@ for key, default in {
     "q_index": 0,
     "q_answers": [],
     "q_feedback": [],
-    "q_correct": []
+    "q_correct": [],
+    "fallback_message": ""
 }.items():
     if key not in st.session_state:
         st.session_state[key] = default
 
-exit_commands = ["exit", "quit"]
+# --- Conversation-ending keywords ---
+EXIT_KEYWORDS = {"exit", "quit", "bye", "close", "stop"}
 
 # --- Functions ---
 def start_app():
     st.session_state.started = True
     st.session_state.hide_footer = True
+    st.session_state.fallback_message = ""
 
 def is_valid(field, value):
     if field == "name":
@@ -63,11 +66,15 @@ def categorize_experience(exp_str):
     else:
         return "Expert / Lead"
 
+def handle_exit_check(input_text):
+    """Check if user wants to end the conversation."""
+    if input_text.lower() in EXIT_KEYWORDS:
+        st.info("👋 Thank you for visiting TalentScout! If you want to apply later, just come back anytime.")
+        st.stop()
+
 def handle_submission():
     val = st.session_state.input_value.strip()
-    if val.lower() in exit_commands:
-        st.info("You have exited the application. Thank you!")
-        st.stop()
+    handle_exit_check(val)
 
     idx = st.session_state.current_field_index
     field = fields[idx]
@@ -76,8 +83,9 @@ def handle_submission():
         st.session_state.answers[field] = val
         st.session_state.current_field_index += 1
         st.session_state.input_value = ""
+        st.session_state.fallback_message = ""
     else:
-        st.warning("⚠️ Please enter a valid response before submitting.")
+        st.session_state.fallback_message = f"⚠️ Please enter a valid {field.replace('_', ' ')}."
 
 def handle_answer_submission():
     q_index = st.session_state.q_index
@@ -86,24 +94,17 @@ def handle_answer_submission():
     if selected_option is None:
         st.warning("Please select an answer before submitting.")
         return
-    
+
+    handle_exit_check(selected_option)
+
     question = st.session_state.tech_questions[q_index]
-
-    # Validate selected option
-    if selected_option not in question["options"]:
-        st.warning("Invalid option selected. Please try again.")
-        return
-    
-    if selected_option.lower() in exit_commands:
-        st.info("You have exited the quiz. Thank you for participating!")
-        st.stop()
-
     is_correct, feedback = evaluate_mcq_answer(question, selected_option)
 
     st.session_state.q_answers.append(selected_option)
     st.session_state.q_correct.append(is_correct)
     st.session_state.q_feedback.append(feedback)
     st.session_state.q_index += 1
+    st.session_state.fallback_message = ""
 
 # --- Footer (to be shown only if not hidden) ---
 def show_footer():
@@ -157,9 +158,6 @@ if not st.session_state.started:
     with cols[2]:
         st.button("Apply for a Job", on_click=start_app, use_container_width=True)
 
-    if st.session_state.started and st.session_state.hide_footer:
-        st.experimental_rerun()
-
     if not st.session_state.hide_footer:
         show_footer()
     st.stop()
@@ -178,8 +176,11 @@ for i in range(idx):
 if idx < len(fields):
     field = fields[idx]
     st.markdown(f"<b>{questions_text[field]}</b>", unsafe_allow_html=True)
+    st.info("💡 You can type 'exit', 'quit', or 'bye' anytime to end the application.")
     st.text_input("Your Answer", key="input_value")
     st.button("Submit", on_click=handle_submission)
+    if st.session_state.fallback_message:
+        st.warning(st.session_state.fallback_message)
     st.stop()
 
 # --- Generate Questions ---
@@ -192,13 +193,8 @@ if not st.session_state.questions_ready:
         st.error("Failed to generate questions. Please restart the app.")
         st.stop()
 
-    # Optionally, add "Exit" option to each question to allow quitting quiz anytime
-    for q in st.session_state.tech_questions:
-        if "Exit" not in q["options"]:
-            q["options"].append("Exit")
-
     st.session_state.questions_ready = True
-    st.experimental_rerun()
+    st.rerun()
 
 # --- Quiz Phase ---
 q_index = st.session_state.q_index
@@ -207,12 +203,13 @@ tech_questions = st.session_state.tech_questions
 if q_index < len(tech_questions):
     question = tech_questions[q_index]
     st.markdown(f"### 🧠 Technical Question {q_index + 1}")
-    st.progress((q_index + 1) / len(tech_questions), text=f"Question {q_index + 1} of {len(tech_questions)}")
+    st.progress((q_index + 1) / len(tech_questions), text=f"Question {q_index+1} of {len(tech_questions)}")
 
     st.markdown(f"**{question['question']}**")
     st.radio("Choose your answer:", question["options"], key=f"option_{q_index}")
-
     st.button("Submit Answer", on_click=handle_answer_submission)
+    if st.session_state.fallback_message:
+        st.warning(st.session_state.fallback_message)
 else:
     st.markdown("<h3 style='text-align: center; color: #4CAF50;'>🎉 You’ve completed the technical round!</h3>", unsafe_allow_html=True)
     total_score = sum(10 for is_correct in st.session_state.q_correct if is_correct)
