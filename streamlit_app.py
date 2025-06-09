@@ -19,7 +19,8 @@ for key, default in {
     "q_answers": [],
     "q_feedback": [],
     "q_correct": [],
-    "fallback_message": ""
+    "fallback_message": "",
+    "exit_tip_shown": False  # Track if exit tip was already displayed
 }.items():
     if key not in st.session_state:
         st.session_state[key] = default
@@ -176,7 +177,12 @@ for i in range(idx):
 if idx < len(fields):
     field = fields[idx]
     st.markdown(f"<b>{questions_text[field]}</b>", unsafe_allow_html=True)
-    st.info("💡 You can type 'exit', 'quit', or 'bye' anytime to end the application.")
+
+    # Show exit tip only once
+    if not st.session_state.exit_tip_shown:
+        st.info("💡 You can type 'exit', 'quit', or 'bye' anytime to end the application.")
+        st.session_state.exit_tip_shown = True
+
     st.text_input("Your Answer", key="input_value")
     st.button("Submit", on_click=handle_submission)
     if st.session_state.fallback_message:
