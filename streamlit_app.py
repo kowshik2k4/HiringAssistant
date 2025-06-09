@@ -204,7 +204,7 @@ if q_index < len(tech_questions):
     st.button("Submit Answer", on_click=handle_answer_submission)
 else:
     st.markdown("<h3 style='text-align: center; color: #4CAF50;'>🎉 You’ve completed the technical round!</h3>", unsafe_allow_html=True)
-    st.balloons()
+    # st.balloons()
     
     total_score = sum(10 for is_correct in st.session_state.q_correct if is_correct)
     percentage = total_score * 2
@@ -213,6 +213,7 @@ else:
 
     if percentage >= 90:
         st.success("✅ Excellent! Our recruiting team will follow up with you shortly.")
+        st.balloons()
     elif percentage >= 60:
         st.info("👍 Good effort! Keep growing — we'll keep your profile in view.")
     else:
