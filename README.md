@@ -33,8 +33,9 @@ TalentScout Hiring Assistant is a smart, conversational AI-powered hiring assist
 | ---  | ---  |
 |streamlit|	      UI development and state management|
 |re	|               Regex-based input validation|
-|google.genai|      for generating questions about TechStack|   
-**GEMINI 2.5 FLASH is used with API*
+|google.genai|      for generating questions about TechStack| 
+
+####**GEMINI 2.5 FLASH is used with API**
 # Usage Guide
 🔴In order to run the app on your device please ensure that u have a gemini api key.U can get one at [Get GEMINI API](https://ai.google.dev/gemini-api/docs/api-key)
 * On launch, TalentScout welcomes you and prompts you to start the application.
