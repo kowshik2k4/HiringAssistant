@@ -47,3 +47,9 @@ TalentScout Hiring Assistant is a smart, conversational AI-powered hiring assist
 
 # Prompts Used
 the tailored prompts used are available on prompts.py
+#Challenges & Solutions
+1. Challenge: Maintaining conversation state and context across multiple user inputs within a stateless HTTP environment.
+    * Solution: Leveraged Streamlit’s st.session_state to persist data and state between user interactions.
+2. Challenge: when we trigger an event and flags are changed,streamlit doesnt update 
+    * Solution: Use st.rerun() where the action is triggered
+  
