@@ -44,3 +44,6 @@ TalentScout Hiring Assistant is a smart, conversational AI-powered hiring assist
 * Based on your tech stack, TalentScout generates 3-5 tailored multiple-choice technical questions.
 * Submit your answers to complete the assessment.
 * At the end, your score and feedback will be displayed with next steps.
+
+# Prompts Used
+the tailored prompts used are available on prompts.py
