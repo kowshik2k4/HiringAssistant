@@ -23,6 +23,8 @@ for key, default in {
     if key not in st.session_state:
         st.session_state[key] = default
 
+exit_commands = ["exit", "quit"]
+
 # --- Functions ---
 def start_app():
     st.session_state.started = True
@@ -62,9 +64,13 @@ def categorize_experience(exp_str):
         return "Expert / Lead"
 
 def handle_submission():
+    val = st.session_state.input_value.strip()
+    if val.lower() in exit_commands:
+        st.info("You have exited the application. Thank you!")
+        st.stop()
+
     idx = st.session_state.current_field_index
     field = fields[idx]
-    val = st.session_state.input_value.strip()
 
     if is_valid(field, val):
         st.session_state.answers[field] = val
@@ -80,8 +86,18 @@ def handle_answer_submission():
     if selected_option is None:
         st.warning("Please select an answer before submitting.")
         return
-
+    
     question = st.session_state.tech_questions[q_index]
+
+    # Validate selected option
+    if selected_option not in question["options"]:
+        st.warning("Invalid option selected. Please try again.")
+        return
+    
+    if selected_option.lower() in exit_commands:
+        st.info("You have exited the quiz. Thank you for participating!")
+        st.stop()
+
     is_correct, feedback = evaluate_mcq_answer(question, selected_option)
 
     st.session_state.q_answers.append(selected_option)
@@ -141,9 +157,8 @@ if not st.session_state.started:
     with cols[2]:
         st.button("Apply for a Job", on_click=start_app, use_container_width=True)
 
-    # Manual rerun after state change
     if st.session_state.started and st.session_state.hide_footer:
-        st.rerun()
+        st.experimental_rerun()
 
     if not st.session_state.hide_footer:
         show_footer()
@@ -154,7 +169,6 @@ idx = st.session_state.current_field_index
 st.markdown("<h3 style='text-align: center; margin-top: 2em;'>📝 Tell us about yourself</h3>", unsafe_allow_html=True)
 progress_ratio = min((idx + 1) / len(fields), 1.0)
 st.progress(progress_ratio, text=f"Step {min(idx+1, len(fields))} of {len(fields)}")
-
 
 for i in range(idx):
     field = fields[i]
@@ -178,8 +192,13 @@ if not st.session_state.questions_ready:
         st.error("Failed to generate questions. Please restart the app.")
         st.stop()
 
+    # Optionally, add "Exit" option to each question to allow quitting quiz anytime
+    for q in st.session_state.tech_questions:
+        if "Exit" not in q["options"]:
+            q["options"].append("Exit")
+
     st.session_state.questions_ready = True
-    st.rerun()
+    st.experimental_rerun()
 
 # --- Quiz Phase ---
 q_index = st.session_state.q_index
@@ -188,7 +207,7 @@ tech_questions = st.session_state.tech_questions
 if q_index < len(tech_questions):
     question = tech_questions[q_index]
     st.markdown(f"### 🧠 Technical Question {q_index + 1}")
-    st.progress((q_index + 1)/len(tech_questions), text=f"Question {q_index+1} of {len(tech_questions)}")
+    st.progress((q_index + 1) / len(tech_questions), text=f"Question {q_index + 1} of {len(tech_questions)}")
 
     st.markdown(f"**{question['question']}**")
     st.radio("Choose your answer:", question["options"], key=f"option_{q_index}")
@@ -196,8 +215,6 @@ if q_index < len(tech_questions):
     st.button("Submit Answer", on_click=handle_answer_submission)
 else:
     st.markdown("<h3 style='text-align: center; color: #4CAF50;'>🎉 You’ve completed the technical round!</h3>", unsafe_allow_html=True)
-    # st.balloons()
-    
     total_score = sum(10 for is_correct in st.session_state.q_correct if is_correct)
     percentage = total_score * 2
 
